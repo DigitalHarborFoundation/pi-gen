@@ -1,7 +1,5 @@
 #!/bin/sh
 
-on_chroot << EOF
-
 echo "Detecting architecture...";
 MACHINE_MTYPE="$(uname -m)";
 ARCH="${MACHINE_MTYPE}";
@@ -27,14 +25,14 @@ else
 fi;
 
 echo "Retrieving GPG key [${REPO_VENDOR}] ($gpg_key)...";
-curl $gpg_key | gpg --dearmor > ${ROOTFS_DIR}/etc/apt/trusted.gpg.d/${REPO_VENDOR}_vscode.gpg;
+curl -L $gpg_key | gpg --dearmor > /etc/apt/trusted.gpg.d/${REPO_VENDOR}_vscode.gpg;
 
 echo "Removing any previous entry to headmelted repository";
-rm -rf ${ROOTFS_DIR}/etc/apt/sources.list.d/headmelted_codebuilds.list;
-rm -rf ${ROOTFS_DIR}/etc/apt/sources.list.d/codebuilds.list;
+rm -rf /etc/apt/sources.list.d/headmelted_codebuilds.list;
+rm -rf /etc/apt/sources.list.d/codebuilds.list;
   
 echo "Installing [${REPO_VENDOR}] repository...";
-echo "${repo_entry}" > ${ROOTFS_DIR}/etc/apt/sources.list.d/${REPO_VENDOR}_vscode.list;
+echo "${repo_entry}" > /etc/apt/sources.list.d/${REPO_VENDOR}_vscode.list;
   
 echo "Updating APT cache..."
 apt-get update -yq;
@@ -88,4 +86,3 @@ A shortcut should also now be available in your desktop menus (depending on your
 
 ";
 
-EOF
