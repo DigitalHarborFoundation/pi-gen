@@ -11,6 +11,8 @@ install -m 644 files/DHF-Background.png "${ROOTFS_DIR}/usr/share/piportal/DHF-Ba
 on_chroot << EOF
    rm -f /etc/xdg/autostart/piwiz.desktop
    sed -i 's/^wallpaper=.*$/wallpaper=\/usr\/share\/piportal\/DHF-Background\.png/' /etc/lightdm/pi-greeter.conf
+
+   sed -i 's/^wallpaper=.*$/wallpaper=\/usr\/share\/piportal\/DHF-Background\.png/' /etc/xdg/pcmanfm/LXDE-pi/desktop-items-0.conf
 #   kill $(ps aux | grep '[p]iwiz' | awk '{print $2}')
 #   wget -q http://dhf-software.s3.amazonaws.com/DHF-Background.png -O /home/pi/DHF-Background.png
 #   pcmanfm --set-wallpaper /home/pi/DHF-Background.png 
