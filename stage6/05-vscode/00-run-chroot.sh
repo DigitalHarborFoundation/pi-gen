@@ -46,7 +46,10 @@ else
 fi;
 
 echo "Installing Visual Studio Code from [${repo_name}]...";
-apt-get install -t ${repo_name} -y ${code_executable_name};
+apt-get install -t ${repo_name} -y code-oss=1.29.0-1539702286;
+
+runuser -l pi -c 'code-oss --install-extension ritwickdey.liveserver'
+
 #apt-get install -t ${repo_name} -y --allow-unauthenticated ${code_executable_name};
 
 if [ $? -eq 0 ]; then
@@ -79,10 +82,6 @@ fi;
 echo "
 
 Installation complete!
-
-You can start code at any time by calling \"${code_executable_name}\" within a terminal.
-
-A shortcut should also now be available in your desktop menus (depending on your distribution).
 
 ";
 
